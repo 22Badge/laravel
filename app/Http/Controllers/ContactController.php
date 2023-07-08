@@ -13,12 +13,15 @@ class ContactController extends Controller
     //}
     //Index
     public function index( CompanyRepository $company ){
-        $contacts = $this -> getContacts();
-        //$companies = $company -> company_data();
-        $companies = json_decode(json_encode($company -> company_data()));
-        //$companies =json_decode(json_encode($this -> getCompanies()));
+        $contacts = Contact::where(function ($query) {
+        if ($companyId = request()->query("company_id")) {
+            $query->where("company_id", $companyId);
+        }
+        })->paginate(7);
+        $companies = $company -> company_data();
         return view('contacts.index',['contacts'=>$contacts,'companies' => $companies]);
-    }
+        }
+        
 
     //Create
     public function create(){
