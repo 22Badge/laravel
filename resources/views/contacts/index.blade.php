@@ -39,7 +39,7 @@
 
                                     </tbody>
                                 </table>
-                                {{ $contacts->withQueryString()->links() }}
+                                    {{ $contacts->withQueryString()->links() }}
                             </div>
                         </div>
                     </div>
